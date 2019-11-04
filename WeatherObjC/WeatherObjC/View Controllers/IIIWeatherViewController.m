@@ -7,12 +7,17 @@
 //
 
 #import "IIIWeatherViewController.h"
+#import "IIIWeatherFetcher.h"
 
-@interface IIIWeatherViewController ()
+@interface IIIWeatherViewController ()  //private
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+@property IIIWeatherFetcher * iiiweatherFetcher;
+
+@property NSArray<IIIWeather *> *weathers;
 
 @end
 
@@ -20,10 +25,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _weathers = @[];
+    
+    _iiiweatherFetcher = [[IIIWeatherFetcher alloc] init];
+    [_iiiweatherFetcher fetchWeather:^(NSArray *weathers, NSError *error) {
+        self.weathers = weathers ?: @[];
+    }];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -31,6 +40,10 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
+
 
 @end
+
+
+
