@@ -33,11 +33,37 @@ static NSString *const WeatherFetcherBaseURLString = @"https://api.openweatherma
     
     //URLSession
     [[NSURLSession.sharedSession dataTaskWithURL:URL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"Finished fetching weathers.....");
+        NSLog(@"started fetching weathers.....");
         
+        if (error) {
+            NSLog(@"Error fetching weathers: %@", error);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler(nil, error);
+            });
+            return;
+        }
+        
+        /* testing fetching using dummyString
         NSString *dummyString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        
         NSLog(@"Dummy string: %@", dummyString);
+        */
+         
+        NSError *jsonError = nil;
+        NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
+        
+        if (!results) {
+            NSLog(@"Error decoding json: %@", jsonError);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler(nil, jsonError);
+            });
+            return;
+        }
+        
+        NSLog(@"all datas: %@", results);
+        
+        
     }] resume];
 }
 
