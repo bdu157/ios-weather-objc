@@ -64,14 +64,28 @@ static NSString *const WeatherFetcherBaseURLString = @"https://api.openweatherma
         //NSLog(@"all datas: %@", results);
         NSMutableArray *weathers = [[NSMutableArray alloc] init];
         
+        //cityname
         NSDictionary *city = [results objectForKey:@"city"];
         NSString *name = [city objectForKey:@"name"];
         [weathers addObject:name];
-        NSLog(@"print cityname: %@", weathers);
+        NSLog(@"print cityname: %@", name);
         
         
+        //temp & weather
+        NSArray *listDictionaries = [results objectForKey:@"list"];
+    
+        for (NSDictionary *dictionary in listDictionaries) {
+            
+            NSDictionary *main = [dictionary objectForKey:@"main"];
+            NSNumber *temp = main[@"temp"];
+            [weathers addObject:temp];
+            NSArray *weather = [dictionary objectForKey:@"weather"];
+            NSString *icon = weather[0][@"icon"];
+            [weathers addObject:icon];
+        }
         
-        
+        NSLog(@"weather temp and icon: %@", weathers);
+
         
     }] resume];
 }
