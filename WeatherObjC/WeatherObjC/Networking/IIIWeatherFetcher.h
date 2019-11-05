@@ -13,9 +13,8 @@ typedef void (^WeatherFetcherCompletionHandler)(NSArray *weathers, NSError *erro
 
 @interface IIIWeatherFetcher : NSObject
 
-@property (strong, nonatomic) NSMutableArray<IIIWeather *> *weathers;
 
--(void)fetchWeather: (WeatherFetcherCompletionHandler)completionHandler;
+-(void)fetchWeatherWithZipCode:(NSString *)zipCode compleion:(WeatherFetcherCompletionHandler)completionHandler;
 
 @end
 

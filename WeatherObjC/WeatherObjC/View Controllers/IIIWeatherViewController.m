@@ -28,7 +28,11 @@
     _weathers = @[];
     
     _iiiweatherFetcher = [[IIIWeatherFetcher alloc] init];
-    [_iiiweatherFetcher fetchWeather:^(NSArray *weathers, NSError *error) {
+    [_iiiweatherFetcher fetchWeatherWithZipCode:@"94040" compleion:^(NSArray *weathers, NSError *error) {
+        if (error) {
+            NSLog(@"Error fetching weather: %@", error);
+        }
+        //dispatch
         self.weathers = weathers ?: @[];
     }];
 }

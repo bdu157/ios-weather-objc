@@ -10,14 +10,36 @@
 
 @implementation IIIWeather
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary cityName:(NSString *)name
 {
     self = [super init];
     if (self) {
-        
+        //temp
+        _temp = dictionary [@"main"][@"temp"];
+
+        //icon
+        NSArray *weather = dictionary[@"weather"];
+        NSString *icon = weather[0][@"icon"];
+        _iconImage = [UIImage imageNamed:icon];
+
+        //name
+        _cityName = name;
     }
+    
     return self;
 }
+
+//- (instancetype)initWithName:(NSString *)name
+//{
+//    self = [super init];
+//    if (self) {
+//        
+//        //name
+//        _name = name;
+//    }
+//    return self;
+//}
 
 @end
 
@@ -42,7 +64,8 @@ return the instance of it -> return of it (convenience)
  
 dictionary [@main][@temp]
 uiimage imagednamed: dictionary[@weather][0][@icon]];
- 
+
+
 dictionary[@"main"]
 dictionary[@"main"][@"temp"]
 */
