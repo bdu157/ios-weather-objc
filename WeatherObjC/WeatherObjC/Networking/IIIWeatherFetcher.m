@@ -13,8 +13,6 @@ static NSString *const WeatherFetcherBaseURLString = @"https://api.openweatherma
 
 @interface IIIWeatherFetcher ()
 
-
-
 @end
 
 @implementation IIIWeatherFetcher
@@ -42,7 +40,7 @@ static NSString *const WeatherFetcherBaseURLString = @"https://api.openweatherma
             NSLog(@"Error fetching weathers: %@", error);
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                completionHandler(nil, error);
+                completionHandler(error);
             });
             return;
         }
@@ -59,7 +57,7 @@ static NSString *const WeatherFetcherBaseURLString = @"https://api.openweatherma
             NSLog(@"Error decoding json: %@", jsonError);
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                completionHandler(nil, jsonError);
+                completionHandler(jsonError);
             });
             return;
         }
@@ -107,8 +105,10 @@ static NSString *const WeatherFetcherBaseURLString = @"https://api.openweatherma
         
         NSLog(@"%@", weathers);
         
+        self.weathers = weathers; //giving weathers to public property weathers in header file so it could be accessed through IIWeatherController.weathers
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            completionHandler(weathers, nil);
+            completionHandler(jsonError);
         });
     }] resume];
 }

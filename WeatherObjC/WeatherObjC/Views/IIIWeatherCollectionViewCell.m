@@ -7,6 +7,8 @@
 //
 
 #import "IIIWeatherCollectionViewCell.h"
+#import "IIIWeather.h"
+#import <UIKit/UIKit.h>
 
 @interface IIIWeatherCollectionViewCell()
 
@@ -17,5 +19,25 @@
 @end
 
 @implementation IIIWeatherCollectionViewCell
+
+
+#pragma mark - Private methods
+-(void)updateViews
+{
+    if (self.weather) {
+        self.temperatureLabel.text = [self.weather.temp stringValue];
+        self.weatherImageView.image = [UIImage imageNamed:@"11d.png"];
+    } else {
+        NSLog(@"%s", "there is no weather being passed from view controller");
+    }
+}
+
+-(void)setWeather:(IIIWeather *)weather
+{
+    if (_weather != weather) {
+        _weather = weather;
+        [self updateViews];
+    }
+}
 
 @end

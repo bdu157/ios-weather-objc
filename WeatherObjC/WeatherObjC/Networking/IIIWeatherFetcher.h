@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "IIIWeather.h"
 
-typedef void (^WeatherFetcherCompletionHandler)(NSArray *weathers, NSError *error);
+typedef void (^WeatherFetcherCompletionHandler)(NSError *error);
 
 @interface IIIWeatherFetcher : NSObject
 
+@property NSArray<IIIWeather *> *weathers;
 
 -(void)fetchWeatherWithZipCode:(NSString *)zipCode compleion:(WeatherFetcherCompletionHandler)completionHandler;
 
