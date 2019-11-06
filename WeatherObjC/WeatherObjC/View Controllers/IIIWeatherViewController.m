@@ -35,8 +35,6 @@
     _iiiweatherFetcher = [[IIIWeatherFetcher alloc] init];
 }
 
-
-
 #pragma mark - searchBar method
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -47,11 +45,10 @@
             NSLog(@"Error fetching weather: %@", error);
         }
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.cityNameLabel.text = self.iiiweatherFetcher.weathers[0].cityName;
             [self.collectionView reloadData]; //this should be called here after fetching datas
         });
     }];
-    
-    self.cityNameLabel.text = self.iiiweatherFetcher.weathers[0].cityName;
 }
 
 
