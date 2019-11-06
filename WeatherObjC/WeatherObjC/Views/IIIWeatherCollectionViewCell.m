@@ -26,7 +26,7 @@
 {
     if (self.weather) {
         self.temperatureLabel.text = [self.weather.temp stringValue];
-        self.weatherImageView.image = [UIImage imageNamed:@"11d.png"];
+        self.weatherImageView.image = self.weather.iconImage;
     } else {
         NSLog(@"%s", "there is no weather being passed from view controller");
     }

@@ -50,6 +50,8 @@
             [self.collectionView reloadData]; //this should be called here after fetching datas
         });
     }];
+    
+    self.cityNameLabel.text = self.iiiweatherFetcher.weathers[0].cityName;
 }
 
 
