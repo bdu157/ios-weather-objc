@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "IIIWeather.h"
 
-typedef void (^WeatherFetcherCompletionHandler)(NSError *error);
+typedef void (^WeatherFetcherCompletionHandler)(NSError *error); //you can also use (NSArray *weather) and pass this object within WeatherViewController
 
 @interface IIIWeatherFetcher : NSObject
 
