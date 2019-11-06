@@ -33,21 +33,23 @@
     self.searchBar.delegate = self;
     
     _iiiweatherFetcher = [[IIIWeatherFetcher alloc] init];
-    
-    [_iiiweatherFetcher fetchWeatherWithZipCode:@"94040" compleion:^(NSError *error) {
-        if (error) {
-            NSLog(@"Error fetching weather: %@", error);
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
-    }];
 }
+
+
 
 #pragma mark - searchBar method
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    NSString *zipCode = [self.searchBar text];
     
+    [_iiiweatherFetcher fetchWeatherWithZipCode:zipCode compleion:^(NSError *error) {
+        if (error) {
+            NSLog(@"Error fetching weather: %@", error);
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData]; //this should be called here after fetching datas
+        });
+    }];
 }
 
 
